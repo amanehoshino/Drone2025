@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ドローン革命 — インフォグラフィック</title>
+  <style>
+    /* --- ベース --- */
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#06b6d4; --accent-2:#7c3aed;
+      --glass: rgba(255,255,255,0.04);
+      --maxw:1100px;
+      --shadow: 0 8px 24px rgba(2,6,23,0.6);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      color: #e6eef6;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:#030617;background-image:radial-gradient(circle at 20% 20%, rgba(50,80,160,0.25) 0%, transparent 60%), radial-gradient(circle at 80% 70%, rgba(120,40,180,0.25) 0%, transparent 60%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><circle cx="3" cy="3" r="1" fill="white" opacity="0.8"/><circle cx="150" cy="40" r="1" fill="white" opacity="0.6"/><circle cx="90" cy="160" r="1" fill="white" opacity="0.7"/><circle cx="40" cy="120" r="1" fill="white" opacity="0.5"/></svg>');background-size:cover, cover, 200px 200px;}
+    .wrap{max-width:var(--maxw);margin:32px auto;padding:32px;}
+
+    header{display:flex;align-items:center;gap:20px;margin-bottom:28px}
+    .logo{width:72px;height:72px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+    .logo svg{filter:drop-shadow(0 6px 18px rgba(12,74,92,0.45));}
+    h1{margin:0;font-size:24px;letter-spacing:-0.02em}
+    p.lead{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+    /* grid */
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:24px}
+    main{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:12px;padding:20px;box-shadow:var(--shadow)}
+    aside{position:sticky;top:32px;height:fit-content;background:var(--card);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
+
+    /* section cards */
+    .section{margin-bottom:18px;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));}
+    .section h2{margin:0;font-size:18px}
+    .section .subtitle{color:var(--muted);font-size:13px;margin-top:6px}
+    .kpi-row{display:flex;gap:12px;margin-top:12px}
+    .kpi{flex:1;background:var(--glass);padding:10px;border-radius:10px;text-align:center}
+    .kpi .num{font-size:20px;font-weight:700}
+    .kpi .label{font-size:12px;color:var(--muted)}
+
+    /* timeline */
+    .timeline{margin-top:14px;border-left:2px solid rgba(255,255,255,0.04);padding-left:14px}
+    .tl-item{position:relative;padding:12px 0}
+    .tl-item:before{content:'';position:absolute;left:-9px;top:14px;width:14px;height:14px;border-radius:50%;background:linear-gradient(180deg,var(--accent),var(--accent-2));box-shadow:0 6px 18px rgba(12,74,92,0.45)}
+    .tl-item h3{margin:0;font-size:14px}
+    .tl-item p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+    /* infographic blocks */
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:12px;border-radius:10px}
+    .statbar{height:10px;background:rgba(255,255,255,0.04);border-radius:6px;overflow:hidden}
+    .stat{height:100%;border-radius:6px}
+    .frag{display:flex;gap:10px;align-items:center}
+
+    /* legend & reference */
+    .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .lg{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+    .dot{width:12px;height:12px;border-radius:3px}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* responsive */
+    @media (max-width:980px){.grid{grid-template-columns:1fr}aside{position:static}} 
+
+    /* small utilities */
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:12px;color:var(--muted)}
+    .cta{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021026;font-weight:700;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo" aria-hidden>
+        <!-- drone icon -->
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 7a4 4 0 100 8 4 4 0 000-8z" fill="white" opacity="0.95"/>
+          <path d="M4 6l3 1.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M20 6l-3 1.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M4 18l3-1.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M20 18l-3-1.5" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <h1>ドローン革命 — インフォグラフィック</h1>
+        <p class="lead">報道・軍事・AIが交差するドローンの現在地（要約）</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <!-- Intro -->
+        <section class="section" id="intro">
+          <h2>序章：ドローン革命の全体像</h2>
+          <p class="subtitle">空撮機器 → 情報収集 → 自律兵器プラットフォーム。報道と軍事が交差する構図。</p>
+          <div class="kpi-row">
+            <div class="kpi"><div class="num">2020s+</div><div class="label">世代の変化</div></div>
+            <div class="kpi"><div class="num">多数</div><div class="label">民生機の軍事転用</div></div>
+            <div class="kpi"><div class="num">倫理・法</div><div class="label">規制課題</div></div>
+          </div>
+        </section>
+
+        <!-- Chapter 1 -->
+        <section class="section" id="journalism">
+          <h2>第1章：ドローンジャーナリズム</h2>
+          <p class="subtitle">災害、調査、映像表現 — 1人の記者が空中取材チームになる</p>
+          <div class="grid-2">
+            <div class="card">
+              <strong>取材の利点</strong>
+              <ul style="margin:8px 0 0 16px;color:var(--muted);font-size:13px">
+                <li>低コスト・高機動</li>
+                <li>危険域での運用可</li>
+                <li>3Dマッピング・分析</li>
+              </ul>
+            </div>
+            <div class="card">
+              <strong>活用例</strong>
+              <ul style="margin:8px 0 0 16px;color:var(--muted);font-size:13px">
+                <li>災害現場の俯瞰映像</li>
+                <li>違法伐採・環境調査</li>
+                <li>デモの動向把握</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <strong>映像解析で可能になること</strong>
+              <ol style="margin:8px 0 0 16px;color:var(--muted);font-size:13px">
+                <li>物体・動線解析</li>
+                <li>地表変化の自動検出</li>
+                <li>3Dモデル化</li>
+              </ol>
+            </div>
+            <div class="card">
+              <strong>表現の革新</strong>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:13px">垂直移動や群衆スケールの把握など、視覚言語が拡張。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Chapter 2 -->
+        <section class="section" id="cases">
+          <h2>第2章：運用事例</h2>
+          <p class="subtitle">国際メディアから市民ジャーナリズムまで</p>
+          <div class="grid-2">
+            <div class="card">
+              <strong>CNN / BBC</strong>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:13px">専門ドローンチームを整備。AI解析と組合せた調査報道も実施。</p>
+            </div>
+            <div class="card">
+              <strong>地方メディア</strong>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:13px">少人数で高品質映像を確保。防災や地域取材に強み。</p>
+            </div>
+            <div class="card">
+              <strong>市民ジャーナリズム</strong>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:13px">スマホ＋ドローンで即時記録。だが規制強化のリスクも。</p>
+            </div>
+            <div class="card">
+              <strong>注意点</strong>
+              <ul style="margin:8px 0 0 16px;color:var(--muted);font-size:13px">
+                <li>没収・免許制の増加</li>
+                <li>プライバシー問題</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Regulation -->
+        <section class="section" id="law">
+          <h2>第3章：法規制と倫理</h2>
+          <p class="subtitle">航空法・プライバシー・検閲リスク</p>
+          <div class="grid-2">
+            <div class="card">
+              <strong>空域規制</strong>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:13px">空港周辺・軍事施設・市街地、高度制限（100〜150m）など。</p>
+            </div>
+            <div class="card">
+              <strong>プライバシー</strong>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:13px">住宅の裏庭まで撮影可能。監視社会化の懸念。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Chapter 4: Warfare -->
+        <section class="section" id="warfare">
+          <h2>第4章：戦争兵器としてのドローン（2023–2025）</h2>
+          <p class="subtitle">FPV・自爆型の急増、スウォーム戦術の台頭</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <h3>2023–2024: ロシア・ウクライナ戦争の教訓</h3>
+              <p>民生機の軍事転用、FPV自爆ドローン、長距離攻撃によるインフラ破壊。</p>
+            </div>
+            <div class="tl-item">
+              <h3>2024–2025: 自爆型・小型FPVの増加</h3>
+              <p>消耗戦と大量運用が常態化。数万機の損耗報告も。</p>
+            </div>
+            <div class="tl-item">
+              <h3>米中の技術競争</h3>
+              <p>米軍は有人・無人混合編隊、中国はスウォームとAI編隊制御を推進。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Chapter 5 & 6 -->
+        <section class="section" id="ai-future">
+          <h2>第5章・第6章：AI × ドローン と汎用化</h2>
+          <p class="subtitle">自律攻撃、映像解析、民生機の兵器化</p>
+          <div class="grid-2">
+            <div class="card">
+              <strong>自律攻撃システム</strong>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:13px">目標識別 → 攻撃実行。発砲許可だけ人間が与える運用も。</p>
+            </div>
+            <div class="card">
+              <strong>FPVの非対称性</strong>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:13px">低価格で大量運用が可能。従来兵器とのコスト差が戦略を変える。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section" id="conclusion">
+          <h2>結論</h2>
+          <p class="subtitle">技術進歩と社会的リスクが同時進行。総合的な議論が必要。</p>
+          <div style="margin-top:10px;color:var(--muted);font-size:13px">
+            ドローンは報道の民主化・戦争の無人化・監視社会化を同時に生み出す。技術・法制度・倫理の三方向から備える必要がある。
+          </div>
+        </section>
+
+        <footer>
+          <div class="pill">参考文献：BBC / CNN / RAND / NATO / 各種学術誌（2020–2024）</div>
+        </footer>
+      </main>
+
+      <aside>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <strong>要点サマリ</strong>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">報道利用・軍事化・法倫理の三大テーマを可視化</div>
+          </div>
+          <div>
+            <a class="cta" href="#intro">DM</a>
+          </div>
+        </div>
+
+        <div class="section" style="margin-top:12px;padding:12px;background:transparent;box-shadow:none">
+          <h3 style="margin:0">視覚データ（概念的）</h3>
+          <div style="margin-top:10px">
+            <div class="frag"><div style="flex:1">FPVドローン普及率</div><div style="width:100px;text-align:right">高</div></div>
+            <div class="statbar" style="margin-top:6px"><div class="stat" style="width:78%;background:linear-gradient(90deg,var(--accent),var(--accent-2))"></div></div>
+
+            <div class="frag" style="margin-top:10px"><div style="flex:1">報道での導入率</div><div style="width:100px;text-align:right">中〜高</div></div>
+            <div class="statbar" style="margin-top:6px"><div class="stat" style="width:64%;background:linear-gradient(90deg,var(--accent-2),var(--accent))"></div></div>
+
+            <div class="frag" style="margin-top:10px"><div style="flex:1">自律兵器化のリスク</div><div style="width:100px;text-align:right">高</div></div>
+            <div class="statbar" style="margin-top:6px"><div class="stat" style="width:86%;background:linear-gradient(90deg,#ff6b6b,#f97316)"></div></div>
+          </div>
+        </div>
+
+        <div class="section" style="margin-top:12px;padding:12px">
+          <h3 style="margin:0">ミニ・タイムライン</h3>
+          <div class="timeline" style="border-left:2px dashed rgba(255,255,255,0.03);padding-left:12px;margin-top:10px">
+            <div class="tl-item"><h3>2011</h3><p class="subtitle">東日本大震災 → 災害利用の始まり</p></div>
+            <div class="tl-item"><h3>2020s</h3><p class="subtitle">自治体/メディアの標準導入</p></div>
+            <div class="tl-item"><h3>2023–2025</h3><p class="subtitle">戦争での大量運用・自爆ドローンの増加</p></div>
+          </div>
+        </div>
+
+        <div class="section" style="margin-top:12px;padding:12px">
+          <h3 style="margin:0">倫理・法のチェックリスト</h3>
+          <ul style="margin:8px 0 0 16px;color:var(--muted);font-size:13px">
+            <li>撮影許可・空域確認</li>
+            <li>個人情報と編集方針</li>
+            <li>没収・拘束のリスク認知</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:12px" class="legend">
+          <div class="lg"><span class="dot" style="background:linear-gradient(90deg,var(--accent),var(--accent-2))"></span>報道</div>
+          <div class="lg"><span class="dot" style="background:linear-gradient(90deg,#ff6b6b,#f97316)"></span>軍事</div>
+          <div class="lg"><span class="dot" style="background:linear-gradient(90deg,#10b981,#06b6d4)"></span>テクノロジー</div>
+        </div>
+
+        <div style="margin-top:14px;text-align:center;color:var(--muted);font-size:13px">
+          作成：ドローン革命レポート（要約）
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
